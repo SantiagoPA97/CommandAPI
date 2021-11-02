@@ -7,6 +7,11 @@ variables:
 
 steps:
 - task: UseDotNet@2
+  inputs:
+    version: '5.0.x'
+    packageType: runtime
+
+- task: UseDotNet@2
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
@@ -25,6 +30,6 @@ steps:
     projects: 'src/CommandAPI/*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.
     ArtifactStagingDirectory)'
-    
+
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
